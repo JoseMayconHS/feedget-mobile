@@ -1,11 +1,13 @@
 import React from 'react'
-import { Image, ImageBackground, TouchableOpacityProps } from 'react-native'
+import { TouchableOpacityProps } from 'react-native'
 import { Camera, Trash } from 'phosphor-react-native'
 
 import * as S from './styles'
 
+import { ScreenshotType } from '../../../../../utils/feedbackTypes'
+
 interface ScreenshotProps extends TouchableOpacityProps {
-  screenshot?: string,
+  screenshot?: ScreenshotType,
   onTakeShot(): void,
   onRemoveShot(): void
 }
@@ -13,7 +15,7 @@ interface ScreenshotProps extends TouchableOpacityProps {
 export function Screenshot({ screenshot, onRemoveShot, onTakeShot, ...rest }: ScreenshotProps) {
   return (
     <S.ScreenshotContainer
-      { ...rest }
+      {...rest}
       onPress={screenshot ? onRemoveShot : onTakeShot}
     >
       {

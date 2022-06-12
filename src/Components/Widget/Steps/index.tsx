@@ -10,7 +10,6 @@ import { Success } from './Success'
 import { FeedbackTypeKeys, feedbackTypes } from '../../../utils/feedbackTypes'
 
 interface StepsProps extends FormProps {
-  feedbackType: FeedbackTypeKeys,
   setFeedbackType(feedbackType?: FeedbackTypeKeys): void,
   feedbackSent: boolean,
   onBack(): void
@@ -28,33 +27,33 @@ export function Steps({
 
   return (
     <S.StepsContainer>
-        {
-          (feedbackType || feedbackInfo || !feedbackSent) && (
-            <S.Header>
-              <S.TitleContainer>
-                {
-                  (feedbackType && !feedbackSent) && (
-                    <S.TitleIcon>
-                      <feedbackInfo.Icon />
-                    </S.TitleIcon>
-                  )
-                }
-                {
-                  !feedbackSent && (
-                    <S.Title>{feedbackInfo?.title ?? 'Deixe seu feedback'}</S.Title>
-                  )
-                }
-              </S.TitleContainer>
-            </S.Header>
-          )
-        }
-        {
-          feedbackType && (
-            <S.BackButton onPress={onBack}>
-              <ArrowLeft />
-            </S.BackButton>
-          )
-        }
+      {
+        (feedbackType || feedbackInfo || !feedbackSent) && (
+          <S.Header>
+            <S.TitleContainer>
+              {
+                (feedbackType && !feedbackSent) && (
+                  <S.TitleIcon>
+                    <feedbackInfo.Icon />
+                  </S.TitleIcon>
+                )
+              }
+              {
+                !feedbackSent && (
+                  <S.Title>{feedbackInfo?.title ?? 'Deixe seu feedback'}</S.Title>
+                )
+              }
+            </S.TitleContainer>
+          </S.Header>
+        )
+      }
+      {
+        feedbackType && (
+          <S.BackButton onPress={onBack}>
+            <ArrowLeft />
+          </S.BackButton>
+        )
+      }
       <S.Steps>
         {
           feedbackSent ? (
@@ -63,12 +62,13 @@ export function Steps({
             !feedbackType ? (
               <FeedbackTypes setFeedbackType={setFeedbackType} />
             ) : <Form
-                onFeedbackSent={onFeedbackSent}
-                comment={comment}
-                loading={loading}
-                onComment={onComment}
-                updateLoader={updateLoader}
-              />
+              feedbackType={feedbackType}
+              onFeedbackSent={onFeedbackSent}
+              comment={comment}
+              loading={loading}
+              onComment={onComment}
+              updateLoader={updateLoader}
+            />
         }
       </S.Steps>
     </S.StepsContainer>

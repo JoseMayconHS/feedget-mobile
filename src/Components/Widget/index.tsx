@@ -9,7 +9,6 @@ import { Steps } from './Steps'
 
 import { theme } from '../../theme'
 import { FeedbackTypeKeys } from '../../utils/feedbackTypes'
-import { View } from 'react-native'
 import { Copyright } from '../Copyright'
 
 function HandleComponent() {
@@ -46,7 +45,7 @@ function Widget() {
 
   return (
     <>
-      <S.Button onPress={ _handleButtonSheet }>
+      <S.Button onPress={_handleButtonSheet}>
         <ChatTeardropDots color='#FFF' />
       </S.Button>
 
@@ -68,7 +67,7 @@ function Widget() {
           backgroundColor: theme.colors.primary,
           width: 60
         }}
-        handleComponent={ HandleComponent }
+        handleComponent={HandleComponent}
         backgroundStyle={{
           backgroundColor: theme.background.primary
         }}
