@@ -18,7 +18,7 @@ interface StepsProps extends FormProps {
 export function Steps({
   feedbackType, feedbackSent,
   setFeedbackType,
-  comment, loading,
+  comment, isSendingFeedback,
   onComment, onFeedbackSent, updateLoader,
   onBack
 }: StepsProps) {
@@ -65,7 +65,7 @@ export function Steps({
               feedbackType={feedbackType}
               onFeedbackSent={onFeedbackSent}
               comment={comment}
-              loading={loading}
+              isSendingFeedback={isSendingFeedback}
               onComment={onComment}
               updateLoader={updateLoader}
             />

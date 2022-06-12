@@ -10,6 +10,6 @@ interface LoadingHOCProps {
 
 export function LoadingHOC({ Component, loading, activityIndicatorProps }: LoadingHOCProps) {
   return loading ? (
-    <ActivityIndicator color={ theme.colors.primary } { ...activityIndicatorProps } />
+    <ActivityIndicator color={theme.colors.primary} {...activityIndicatorProps} />
   ) : <Component />
 }

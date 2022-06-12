@@ -15,15 +15,15 @@ import { FeedbackTypeKeys, ScreenshotType } from '../../../../utils/feedbackType
 
 export interface FormProps {
   onFeedbackSent(): void,
-  updateLoader(loading: boolean): void,
+  updateLoader(isSendingFeedback: boolean): void,
   onComment(comment: string): void,
   feedbackType: FeedbackTypeKeys,
   comment: string,
-  loading: boolean
+  isSendingFeedback: boolean
 }
 
 export function Form({
-  comment, loading, feedbackType,
+  comment, isSendingFeedback, feedbackType,
   onFeedbackSent, updateLoader, onComment
 }: FormProps) {
   const [screenshot, setScreenshot] = useState<ScreenshotType>(null)
@@ -38,13 +38,11 @@ export function Form({
     updateLoader(true)
 
     try {
-      const { data } = await API.post(API_ENDPOINTERS.POST.feedback, {
+      await API.post(API_ENDPOINTERS.POST.feedback, {
         type: feedbackType,
         comment,
-        screenshot: `data:image/png;base64; ${screenshot}`
+        screenshot: `data:image/png;base64,${screenshot}`
       })
-
-      console.log(data)
 
       onFeedbackSent()
     } catch (e) {
@@ -80,12 +78,12 @@ export function Form({
           screenshot={screenshot}
         />
         <SS.Submit
-          disabled={loading}
+          disabled={isSendingFeedback}
           onPress={_handleFeedbackSend}
         >
           <LoadingHOC
             Component={() => <SS.SubmitText>Enviar feedback</SS.SubmitText>}
-            loading={loading}
+            loading={isSendingFeedback}
           />
         </SS.Submit>
       </SS.SubmitContainer>

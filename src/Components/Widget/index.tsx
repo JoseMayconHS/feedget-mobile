@@ -24,7 +24,7 @@ function Widget() {
   const [feedbackType, setFeedbackType] = useState<FeedbackTypeKeys>(null)
   const [feedbackSent, setFeedbackSent] = useState(false)
 
-  const [loading, setLoading] = useState(false)
+  const [isSendingFeedback, setLoading] = useState(false)
   const [comment, setComment] = useState('')
 
   const buttonRef = useRef<ButtonSheet>(null)
@@ -78,7 +78,7 @@ function Widget() {
 
           comment={comment}
           onComment={setComment}
-          loading={loading}
+          isSendingFeedback={isSendingFeedback}
           updateLoader={setLoading}
           onFeedbackSent={() => setFeedbackSent(true)}
           feedbackSent={feedbackSent}
