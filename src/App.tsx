@@ -15,7 +15,7 @@ export default function App() {
         <StatusBar backgroundColor={theme.background.primary} barStyle='light-content' />
         <IconContext.Provider
           value={{
-            color: '#FFF'
+            color: theme.colors.primary
           }}
         >
           <Widget />

@@ -9,15 +9,38 @@ import { Steps } from './Steps'
 
 import { theme } from '../../theme'
 import { FeedbackTypeKeys } from '../../utils/feedbackTypes'
+import { View } from 'react-native'
+import { Copyright } from '../Copyright'
+
+function HandleComponent() {
+  return (
+    <S.HandleComponent>
+      <S.HandleComponentIndicator />
+      <Copyright />
+    </S.HandleComponent>
+  )
+}
 
 function Widget() {
-  const [feedbackType, setFeedbackType] = useState<FeedbackTypeKeys>('BUG')
+  const [feedbackType, setFeedbackType] = useState<FeedbackTypeKeys>(null)
+  const [feedbackSent, setFeedbackSent] = useState(false)
+
+  const [loading, setLoading] = useState(false)
+  const [comment, setComment] = useState('')
 
   const buttonRef = useRef<ButtonSheet>(null)
 
   const snapPoints = useMemo(() => [1, 270], [])
 
+  const _handleRestore = useCallback(() => {
+    setLoading(() => false)
+    setFeedbackSent(() => false)
+    setComment(() => '')
+    setFeedbackType(() => null)
+  }, [])
+
   const _handleButtonSheet = useCallback(() => {
+    // _handleRestore()
     buttonRef.current?.expand()
   }, [buttonRef])
 
@@ -36,15 +59,31 @@ function Widget() {
           borderTopRightRadius: 15,
           borderTopLeftRadius: 15
         }}
-        onClose={() => setFeedbackType(null)}
+        onChange={index => {
+          if (!index) {
+            _handleRestore()
+          }
+        }}
         handleIndicatorStyle={{
           backgroundColor: theme.colors.primary,
           width: 60
         }}
+        handleComponent={ HandleComponent }
+        backgroundStyle={{
+          backgroundColor: theme.background.primary
+        }}
       >
         <Steps
           feedbackType={feedbackType}
-          setFeedbackType={ setFeedbackType }
+          setFeedbackType={setFeedbackType}
+
+          comment={comment}
+          onComment={setComment}
+          loading={loading}
+          updateLoader={setLoading}
+          onFeedbackSent={() => setFeedbackSent(true)}
+          feedbackSent={feedbackSent}
+          onBack={_handleRestore}
         />
       </ButtonSheet>
     </>

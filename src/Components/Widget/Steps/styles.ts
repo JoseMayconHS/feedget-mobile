@@ -7,6 +7,8 @@ export const StepsContainer = styled.View`
   background: ${ theme.background.primary };
   padding-bottom: ${ getBottomSpace() + 16 }px;
   align-items: center;
+  padding: 0 10px;
+  position: relative;
 `
 
 export const Header = styled.View`
@@ -39,6 +41,5 @@ export const Title = styled.Text`
 
 export const Steps = styled.View`
   width: 100%;
-  height: 120px;
-  margin-bottom: 20px;
+  height: 130px;
 `

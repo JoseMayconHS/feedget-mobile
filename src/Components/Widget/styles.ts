@@ -14,3 +14,19 @@ export const Button = styled.TouchableOpacity`
   align-items: center;
   justify-content:  center;
 `
+
+export const HandleComponent = styled.View`
+  align-items: center;
+  justify-content: center;
+  background: ${ theme.background.primary };
+  position: relative;
+  height: 30px;
+`
+
+export const HandleComponentIndicator = styled.View`
+  width: 70px;
+  height: 5px;
+  border-radius: 4px;
+  background: ${ theme.colors.primary };
+  margin: 5px 0;
+`
